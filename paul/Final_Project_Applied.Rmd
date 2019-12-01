@@ -719,7 +719,6 @@ logistic_prediction =  df.preds %>%select(recId, prob)
 suppressWarnings(kable(head(topshots, n = 6),
       format="latex", booktabs = T)) %>%
   kable_styling(latex_options="striped", position = "center")
-
 ```
 
 # **Shot Made Odds Analysis Using Logistic Regression**
