@@ -27,7 +27,7 @@ editor_options:
 ```{r, Setup and Loading Packages, echo=F, include=F, warning=F}
 
 library(pacman)
-p_load(rrcov, MASS, dplyr, purrr, ggplot2, Hmisc, pcaPP, knitr, kableExtra, caret, cluster, robustbase, ROCR, Metrics)
+p_load(rrcov, MASS, dplyr, purrr, ggplot2, Hmisc, pcaPP, knitr, kableExtra, caret, cluster, robustbase, ROCR, Metrics,ResourceSelection)
 # first, install MikTex, then run the R command install_tinytex() in order to generate the PDF from the LaTeX markdown.
 
 df <- read.csv("./modelingKobeData.csv", header=T, sep=",", strip.white=T, stringsAsFactors = F, na.strings=c(""))
@@ -654,6 +654,11 @@ loglossTraining = dfTrain %>%
 The misclassification rate, and Log loss for both internal and external cross validations are close in values  However the external cross validated model has higher `Sensitivity`, `Precision`, and `Accuracy`; but lower `Specificity` and `Area Under the Curve` compared to the internal cross validated model.  This suggests that model `Sensitivity`, `Precision`, and `Accuracy` improves, but its predictive performance decreases when evaluated using the external cross validation.
 
 ```{r Logisitic Confusion Matrix Tables,echo = F, include = T, warning = F}
+###HL Test
+library(ResourceSelection)
+hoslem.test(training$shot_made_flag, fitted(mod_fit), g=10)
+
+
 ######### Logistic Internal Cross-Validation Metrics
 lr.SpecSense.confusion.internal <- data.frame(cf$byClass)
 lr.AccuracyP.confusion.internal <- data.frame(cf$overall)
