@@ -752,9 +752,6 @@ For every additional unit in shot_distance  from the hoop, the estimated odds ra
 
 We also were curious if the odds of Bryant making a shot further away from the hoop had a difference during the playoffs. The shot distance is still significant but there is virtually no difference in the odds if the shot was made or not in a regular season game.
 
-# **Conclusion**
-Analysis of the Kobe Bryant Shot Made data shows Kobe is consistent with his shot made by type, location on the court, distance from the hoop and whether he played a regular season game or a playoff game. Based on the analysis performed, a Logistic Regression Model produced better results than a Quadratic Discriminant Model. These statistics are represented in Kobe Bryant’s 20-year successful career.
-
 ```{r Probabilities, echo=F, include=T}
 #Code to generate the probabilities
 dfTrain1 = dfTrain %>% mutate(distance_odds = exp(-0.43569)*shot_distance + exp(0.363779)) %>% mutate(distance_prob = distance_odds/(1+distance_odds))
@@ -764,6 +761,9 @@ plot(dfTrain1$distance_prob,dfTrain1$shot_distance, xlab="Shot Probability", yla
 plot(dfTrain1$shot_distance,dfTrain1$distance_prob, xlab="Shot Distance", ylab="Shot Probability", main="Shot Distance over Probability")
 
 ```
+
+# **Conclusion**
+Analysis of the Kobe Bryant Shot Made data shows Kobe is consistent with his shot made by type, location on the court, distance from the hoop and whether he played a regular season game or a playoff game. Based on the analysis performed, a Logistic Regression Model produced better results than a Quadratic Discriminant Model after taking all variable and model analysis into consideration. These statistics are represented in Kobe Bryant’s 20-year successful career.
 
 \newpage
 # Appendix A: Figures and Tables
