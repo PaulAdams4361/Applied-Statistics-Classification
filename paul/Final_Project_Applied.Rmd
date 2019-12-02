@@ -756,6 +756,7 @@ We also were curious if the odds of Bryant not making a shot further away from t
 Analysis of the Kobe Bryant Shot Made data shows Kobe is consistent with his shot made by type, location on the court, distance from the hoop and whether he played a regular season game or a playoff game. Based on the analysis performed, a Logistic Regression Model produced better results than a Quadratic Discriminant Model. These statistics are represented in Kobe Bryant’s 20-year successful career.
 \newpage
 # Appendix A: Figures and Tables
+
 ### *Appendix A contains content related to the paper*
 
 ## **Receiver Operator Characteristic (ROC) Curves**
