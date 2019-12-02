@@ -746,22 +746,22 @@ suppressWarnings(kable(head(topshots, n = 6),
 # **Shot Made Odds and Probabilities Analysis Using Logistic Regression**
 When analyzing odds for basketball many are interested in the spread, or by how much will the favored team win or lose. There are many other odds played in professional sports, but we are focused on the odds Bryant making a shot or not relative to his distance from the hoop during regular season games and the playoffs.
 
-There is sufficient evidence to suggest that shot_distance from the hoop is not significant (p-value < 0.053303) with respect to all other covariates.  Although the p-value for shot_distance is barely outside alpha = 0.05, it still provides practical information on whether or not Kobe makes his shots.
+There is sufficient evidence to suggest that shot_distance from the hoop is not significant (p-value < 0.053303) with respect to all other covariates. Although the p-value for shot_distance is barely outside alpha = 0.05, it still provides practical information on whether or not Kobe makes his shots.
 
-For every additional unit in shot_distance  from the hoop, the estimated odds ratio of him making the shot increase by a factor of e^ 0.00514126=1.0053956042. This is for every additional unit increase in shot_distance, the estimated odds of Bryant making the shot increase by a factor of 0.0053956042 (1-1.0053956042). A 95% confidence interval for the multiplicative change is (-0.0006427041, 0.01143028475) holding all other variables constant.
+For every additional unit in shot_distance from the hoop, the estimated odds ratio of him making the shot increase by a factor of $e^0.00514126=1.0053956042$. This is for every additional unit increase in shot_distance, the estimated odds of Bryant making the shot increase by a factor of $0.0053956042*(1-1.0053956042)$. A 95% confidence interval for the multiplicative change is $(-0.0006427041, 0.01143028475)$ holding all other variables constant.
 
 We also were curious if the odds of Bryant making a shot further away from the hoop had a difference during the playoffs. The shot distance is still significant but there is virtually no difference in the odds if the shot was made or not in a regular season game.
 
 ```{r Probabilities, echo=F, include=T}
 #Code to generate the probabilities
-dfTrain1 = dfTrain %>% mutate(distance_odds = exp(-0.43569)*shot_distance + exp(0.363779)) %>% mutate(distance_prob = distance_odds/(1+distance_odds))
-par(mfrow=c(1,2))
+#Code to generate the probabilities
+dfTrain1 = dfTrain %>% mutate(distance_odds = exp(0.0053920735)*shot_distance + exp(0.00514126)) %>% mutate(distance_prob = distance_odds/(1+distance_odds))
 
+par(mfrow=c(2,1))
 plot(dfTrain1$distance_prob,dfTrain1$shot_distance, xlab="Shot Probability", ylab="Shot Distance", main="Shot Probability over Distance")
 plot(dfTrain1$shot_distance,dfTrain1$distance_prob, xlab="Shot Distance", ylab="Shot Probability", main="Shot Distance over Probability")
 
 ```
-
 # **Conclusion**
 Analysis of the Kobe Bryant Shot Made data shows Kobe is consistent with his shot made by type, location on the court, distance from the hoop and whether he played a regular season game or a playoff game. Based on the analysis performed, a Logistic Regression Model produced better results than a Quadratic Discriminant Model after taking all variable and model analysis into consideration. These statistics are represented in Kobe Bryant’s 20-year successful career.
 
