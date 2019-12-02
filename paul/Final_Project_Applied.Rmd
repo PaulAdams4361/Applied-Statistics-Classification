@@ -960,7 +960,8 @@ cordDF.ordered.Top10$Correlation <- round(as.numeric(as.character(
 cordDF.ordered.Top10$Correlation)), digits=5)
 
 cordDF.ordered.Top10$`p-Value` <- ifelse(as.numeric(as.character(
-cordDF.ordered.Top10$`p-Value`)) < 0.0001, "p < 0.0001", as.numeric(as.character(cordDF.ordered.Top10$`p-Value`)))
+cordDF.ordered.Top10$`p-Value`)) < 0.0001, "p < 0.0001", as.numeric(as.character(
+cordDF.ordered.Top10$`p-Value`)))
 
 ```
 
@@ -1138,7 +1139,8 @@ colnames(confusionFrame) <- c("Internal CV Statistics",
 ```r
 
 # Apply the developed model to the external data that needs predictions:
-pred.qda.filtered <- suppressWarnings(predict(qda.filtered, newdata = df.numeric.preds))
+pred.qda.filtered <- suppressWarnings(predict(qda.filtered, 
+newdata = df.numeric.preds))
 
 df.preds$shot_made_flag <- pred.qda.filtered
 
@@ -1286,7 +1288,8 @@ aucInternal <- aucInternal@y.values[[1]]
 #LOG LOSS AND PREDICTION FOR TRAINING DATA
 testing$prob = predict(mod_fit, newdata=testing)
 loglossTraining = testing %>%
-  mutate(logloss = testing$shot_made_flag * log(1-testing$prob) + (1-testing$shot_made_flag)*log(1-testing$prob))
+  mutate(logloss = testing$shot_made_flag * log(1-testing$prob) + 
+  (1-testing$shot_made_flag)*log(1-testing$prob))
 
   #Will generate log loss value
   loglossValue = -1/5174 * sum(loglossTraining$logloss)
@@ -1309,7 +1312,8 @@ aucEx <- aucEx@y.values[[1]]
 #LOG LOSS AND PREDICTION FOR External CV
 dfTrain$prob = predict(mod_fit, newdata=dfTrain)
 loglossTraining = dfTrain %>%
-  mutate(logloss = dfTrain$shot_made_flag * log(1-dfTrain$prob) + (1-dfTrain$shot_made_flag)*log(1-dfTrain$prob))
+  mutate(logloss = dfTrain$shot_made_flag * log(1-dfTrain$prob) + 
+  (1-dfTrain$shot_made_flag)*log(1-dfTrain$prob))
 
   #Will generate log loss value
   loglossValue = -1/20697 * sum(loglossTraining$logloss)
