@@ -314,7 +314,7 @@ priori <- data.frame(shot_made_flag_Posterior, proportion_Posterior)
 ##################################################################################################
 ```
 
-# **Quadratic Discriminant Analysis: Internal Cross-Valdiation and Model Development**
+## **Quadratic Discriminant Analysis: Internal Cross-Valdiation and Model Development**
 Following removal of significant levels of multicollinearity from the dataset and partitioning into a 75% training / 25% testing split, internal cross-validation is performed. The specifics of this test involves 25 folds of the data - meaning the 75% training data is divided into 25 partitions. The model is then trainied on 1/25th of the original 75%, then tested against the remaining 24/25ths, 1/25ths at-a-time. This test is repeated 5 times, with each repeat involving a different random partitioning of the 25 specified `folds` of the data. Finally, the model developed using the 75% training split is then applied to the 25% testing split and predictions are measured against the actuals of that split to develop model statistics such as `Accuracy`, `Misclassification`, `Precision`, `Sensitivity` and `Specificity`.
 
 This is internal cross-validation and its objective is to assist in identifying a model that can perform well across different data sets of the same source by using partitions of data from the same set to simulate an environment where those partitions are actually data from different sets. This is typically performed prior to external cross-validation.
@@ -351,7 +351,7 @@ confusion_matrix_results.internal<- confusionMatrix(table(internal_cv.predicted.
 
 ```
 
-# **Quadratic Discriminant Analysis: External Cross-Valdiation**
+## **Quadratic Discriminant Analysis: External Cross-Valdiation**
 After building a model using internal cross-validation, which applied 5 repeated internal cross-validations across the 25 folds of training data, a confusion matrix was constructed and analyzed. Next, we applied the model developed using the 75% training split to make predictions against the entire portion of data that includes values for `shot_made_flag` in order to assess how closely the model can predict against the entire data set compared to the actuals.
 
 Applying the model to the entire dataset as `external cross-validation` provides the model an opportunity to test against different data and more closely simulate a real-life scenario than internal cross-validation. Internal and external cross-validation is performed for later Logistic Regression models as well.Following external cross-validation of both models, the metrics are compared to determine the best model (Quadratic Discriminant Analysis versus Logistic Regression).
@@ -443,7 +443,7 @@ AUC.external <- AUC.external@y.values[[1]]
 
 ```
 
-# **Quadratic Discriminant Analysis: Internal vs. External Cross-Validation**
+## **Quadratic Discriminant Analysis: Internal vs. External Cross-Validation**
 Using the two confusion matrix output tables immediately below, the performance across internal and external cross-validations of the QDA model can be compared. As indicated in those figures, the model performed highly similarly across both cross-validation techniques, indicating the model is consistent and reasonably fit, after controlling for the variables selected for modeling.
 
 ```{r Confusion Matrix and Metrics Table, echo=F, include=T, warning=F}
@@ -965,7 +965,7 @@ cordDF.ordered.Top10$`p-Value`)))
 
 ```
 
-## QDA: Bartlett's Approximation
+## QDA Bartlett Approximation
 ```r
 
 dfTrain.numeric <- df.numeric[which(!is.na(df.numeric$shot_made_flag)),]
@@ -1049,7 +1049,7 @@ priori <- data.frame(shot_made_flag_Posterior, proportion_Posterior)
 
 ```
 
-## QDA: Internal CV and Model Development
+## Quadratic Discriminant Analysis: Internal CV and Model Development
 ```r
 
 subDF.Train.numeric$shot_made_flag <- as.factor(
@@ -1100,7 +1100,7 @@ confusion_matrix_results.external <- confusionMatrix(table(
 external_cv.predicted.qda, dfTrain.numeric$shot_made_flag))
 
 ```
-##  Confusion Matrix Table
+##  Quadratic Discriminant Analysis Confusion Matrix Table
 ```r
 
 ### Internal Cross-Validation Confusion Matrix
@@ -1135,7 +1135,7 @@ colnames(confusionFrame) <- c("Internal CV Statistics",
 
 ```
 
-## Predictions from QDA
+## Predictions from Quadratic Discriminant Analysis
 ```r
 
 # Apply the developed model to the external data that needs predictions:
