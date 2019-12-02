@@ -202,7 +202,9 @@ kable(cordDF.ordered.Top10, format="latex", booktabs = T)  %>%
 
 vifFrame <- vif(df.numeric)
 vifFrame <- vifFrame[order(-vifFrame$VIF),]
-vifFrame.Top7 <- data.frame(head(vifFrame, 7))
+vifFrame.Top7 <- data.frame(head(vifFrame, 7), row.names = NULL)
+colnames(vifFrame.Top7) <- c("Variable", "Variance Inflation Factor")
+vifFrame.Top7$`Variance Inflation Factor` <- round(vifFrame.Top7$`Variance Inflation Factor`, digits = 2)
 
 ```
 
@@ -785,12 +787,25 @@ suppressWarnings(kable(modecoef, format="latex", booktabs = T, longtable = TRUE)
 
 ## **Action Type Frequency Table**
 ```{r Action type freq table,echo=F, include=T, warning=F}
+
 #OPTIONAL - REMOVE IF NECESSARY
 action_type_ft = as.data.frame(table(dfTrain$action_type))
 
 suppressWarnings(kable(action_type_ft, format="latex", booktabs = T, longtable = TRUE)) %>%
   kable_styling(latex_options = c("repeat_header", "striped"), position = "center", font_size = 10)
                                
+```
+
+## **Variance Inflation Factor**
+```{r VIF for Appendix, echo=F, include=T, warning=F}
+
+vifFrame.Appendix <- data.frame(vifFrame, row.names = NULL)
+colnames(vifFrame.Appendix) <- c("Variable", "Variance Inflation Factor")
+vifFrame.Appendix$`Variance Inflation Factor` <- round(vifFrame.Appendix$`Variance Inflation Factor`, digits = 2)
+
+kable(vifFrame.Appendix, format="latex", booktabs = T)  %>%
+  kable_styling(latex_options="striped", position = "center")
+
 ```
 
 \newpage
