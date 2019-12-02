@@ -112,7 +112,7 @@ tryCatch(
 
 ## **Addressing Multicollinearity: Correlation Heat Map for Visual Data Exploration**
 To address multicollinearity among quantitative predictor variables, a correlation heat map (below) was created for visual inspection of correlation. Red corresponds to negative correlation (where an increase in a predictor causes a decrease in the value of its collinear counterpart) whereas blue corresponds to positive correlation.
-```{r Multicollinearity, echo=F, include=T, warning=F, fig.height = 5, fig.width = 10}
+```{r Multicollinearity, echo=F, include=T, warning=F, fig.height = 5, fig.width = 6}
 
 corr.plot <- corrplot::corrplot(cor(df.numeric %>% subset(select=-c(shot_made_flag)))
                    , title = "Correlation among Predictor Variables"
@@ -559,7 +559,7 @@ summary(step.glm)
 step.glm$aic
 ```
 
-Based on the fit-statistics generated from each model selection method, the backwards and stepwise models are identical in fit-statistics with an AIC at 25167.77, and the residual deviance at 25001.77. The forward model selection out-performs both backwards and stepwise models with an AIC of 25166.48, but has a higher a residual deviance at 25001.48. Compared to the forward selected model, the backwards and stepwise models have lower residual deviances, although their residual deviances are very close in value to the forward model, their AIC values are larger compared to the forward selected model. Based on the requirements of the project the stepwise model will be used since it contains `shot distance`.
+Based on the fit-statistics generated from each model selection method, the backwards and stepwise models are identical in fit-statistics with an AIC at 25167.77, and the residual deviance at 25001.77. The forward model selection out-performs both backwards and stepwise models with an AIC of 25166.48, but has a higher a residual deviance at 25001.48. Compared to the forward selected model, the backwards and stepwise models have lower residual deviances, although their residual deviances are very close in value to the forward model, their AIC values are larger compared to the forward selected model. Due to the model selection process, the forward selection model does not contain `shot_distance`; in order to meet the project requirements the stepwise model will be used. The stepwise model has a slightly higher AIC compared to the backwards selected model, but has a lower residual deviance. Residual deviance is a statistic used for goodness-of-fit, where a lower value is desirable. We chose to explore this route because the stepwise model has a AIC value that is similar to the backwards model, but has lower residual deviance.
 ```{r AIC Tables, echo=F, include=T, warning=F}
 
 # Model Selection Statistics AIC and RMSE
@@ -615,6 +615,7 @@ mod_fit <- train(shot_made_flag ~ recId + action_type + game_event_id +
     trControl = ctrl, 
     tuneLength = 5, 
     metric = "logLoss")
+
 ```
 
 
@@ -669,7 +670,7 @@ loglossTraining = dfTrain %>%
 ```
 
 ## **Logistic Regression: Internal vs. External Cross-Validation**
-The misclassification rate, and Log loss for both internal and external cross validations are close in values. However, the external cross-validated model has higher `Sensitivity`, `Precision`, and `Accuracy`; but lower `Specificity` and `Area Under the Curve` compared to the internal cross-validated model. This suggests that model `Sensitivity`, `Precision`, and `Accuracy` improves, but its predictive performance decreases when evaluated using the external cross validation.
+The fit statistics between internal and external cross-validation can be compared to assess model performance. Both internal and external cross-validation methods yielded fit statistics very similar in value. `Sensitivity` performed well, while the other fit statistics are at a moderate performance. This suggests that the model is well-fit.
 
 ```{r Logisitic Confusion Matrix Tables,echo = F, include = T, warning = F}
 ######### Logistic Internal Cross-Validation Metrics
@@ -752,14 +753,13 @@ For every additional unit in shot_distance from the hoop, the estimated odds rat
 
 We also were curious if the odds of Bryant making a shot further away from the hoop had a difference during the playoffs. The shot distance is still significant but there is virtually no difference in the odds if the shot was made or not in a regular season game.
 
-```{r Probabilities, echo=F, include=T, warning=F, fig.height = 8, fig.width = 10, fig.align="center"}
+```{r Probabilities, echo=F, include=T, warning=F, fig.height = 3, fig.width = 5, fig.align="center"}
 
 dfTrain1 = dfTrain %>% mutate(distance_odds = exp(0.0053920735)*shot_distance + exp(0.00514126)) %>% mutate(distance_prob = distance_odds/(1+distance_odds))
 
-par(mfrow=c(2,1))
 plot(dfTrain1$distance_prob,dfTrain1$shot_distance, xlab="Shot Probability", ylab="Shot Distance", main="Shot Probability over Distance")
-plot(dfTrain1$shot_distance,dfTrain1$distance_prob, xlab="Shot Distance", ylab="Shot Probability", main="Shot Distance over Probability")
-par(mfrow=c(1,1))
+
+
 ```
 
 # **Conclusion**

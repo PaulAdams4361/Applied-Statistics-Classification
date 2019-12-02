@@ -234,14 +234,14 @@ game\_event\_id & shot\_type & 0.11238 & p < 0.0001\\
 \toprule
 Variable & Variance Inflation Factor\\
 \midrule
-\rowcolor{gray!6}  shot\_id & 39839750.06\\
-recId & 39838090.54\\
-\rowcolor{gray!6}  shot\_distance & 3.59\\
-loc\_y & 3.05\\
-\rowcolor{gray!6}  shot\_type & 1.91\\
+\rowcolor{gray!6}  shot\_id & 41103299.94\\
+recId & 41101644.14\\
+\rowcolor{gray!6}  shot\_distance & 3.75\\
+loc\_y & 3.31\\
+\rowcolor{gray!6}  shot\_type & 1.88\\
 \addlinespace
-playoffs & 1.72\\
-\rowcolor{gray!6}  game\_event\_id & 1.59\\
+playoffs & 1.78\\
+\rowcolor{gray!6}  game\_event\_id & 1.60\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -344,7 +344,7 @@ A preliminary, manual variable elimination process was performed during the anal
 \textbf{Stepwise Regression Model:}
 \(shot\_made\_flag = recId + action\_type + game\_event\_id + loc\_x + minutes\_remaining + season + seconds\_remaining + shot\_distance + game\_date + shot\_id + attendance + arena\_temp\)
 
-Based on the fit-statistics generated from each model selection method, the backwards and stepwise models are identical in fit-statistics with an AIC at 25167.77, and the residual deviance at 25001.77. The forward model selection out-performs both backwards and stepwise models with an AIC of 25166.48, but has a higher a residual deviance at 25001.48. Compared to the forward selected model, the backwards and stepwise models have lower residual deviances, although their residual deviances are very close in value to the forward model, their AIC values are larger compared to the forward selected model. Based on the requirements of the project the stepwise model will be used since it contains \texttt{shot\ distance}.
+Based on the fit-statistics generated from each model selection method, the backwards and stepwise models are identical in fit-statistics with an AIC at 25167.77, and the residual deviance at 25001.77. The forward model selection out-performs both backwards and stepwise models with an AIC of 25166.48, but has a higher a residual deviance at 25001.48. Compared to the forward selected model, the backwards and stepwise models have lower residual deviances, although their residual deviances are very close in value to the forward model, their AIC values are larger compared to the forward selected model. Due to the model selection process, the forward selection model does not contain \texttt{shot\_distance}; in order to meet the project requirements the stepwise model will be used. The stepwise model has a slightly higher AIC compared to the backwards selected model, but has a lower residual deviance. Residual deviance is a statistic used for goodness-of-fit, where a lower value is desirable. We chose to explore this route because the stepwise model has a AIC value that is similar to the backwards model, but has lower residual deviance.
 
 \begin{table}[H]
 \centering
@@ -372,7 +372,7 @@ External cross-validation is used to evaluate a model after it has been tuned in
 \hypertarget{logistic-regression-internal-vs.external-cross-validation}{%
 \subsection{\texorpdfstring{\textbf{Logistic Regression: Internal vs.~External Cross-Validation}}{Logistic Regression: Internal vs.~External Cross-Validation}}\label{logistic-regression-internal-vs.external-cross-validation}}
 
-The misclassification rate, and Log loss for both internal and external cross validations are close in values. However, the external cross-validated model has higher \texttt{Sensitivity}, \texttt{Precision}, and \texttt{Accuracy}; but lower \texttt{Specificity} and \texttt{Area\ Under\ the\ Curve} compared to the internal cross-validated model. This suggests that model \texttt{Sensitivity}, \texttt{Precision}, and \texttt{Accuracy} improves, but its predictive performance decreases when evaluated using the external cross validation.
+The fit statistics between internal and external cross-validation can be compared to assess model performance. Both internal and external cross-validation methods yielded fit statistics very similar in value. \texttt{Sensitivity} performed well, while the other fit statistics are at a moderate performance. This suggests that the model is well-fit.
 
 \begin{table}[H]
 \centering
@@ -660,19 +660,19 @@ Turnaround Hook Shot & 8\\
 \toprule
 Variable & Variance Inflation Factor\\
 \midrule
-\rowcolor{gray!6}  shot\_id & 39839750.06\\
-recId & 39838090.54\\
-\rowcolor{gray!6}  shot\_distance & 3.59\\
-loc\_y & 3.05\\
-\rowcolor{gray!6}  shot\_type & 1.91\\
+\rowcolor{gray!6}  shot\_id & 41103299.94\\
+recId & 41101644.14\\
+\rowcolor{gray!6}  shot\_distance & 3.75\\
+loc\_y & 3.31\\
+\rowcolor{gray!6}  shot\_type & 1.88\\
 \addlinespace
-playoffs & 1.72\\
-\rowcolor{gray!6}  game\_event\_id & 1.59\\
-attendance & 1.38\\
-\rowcolor{gray!6}  avgnoisedb & 1.35\\
-game\_date & 1.13\\
+playoffs & 1.78\\
+\rowcolor{gray!6}  game\_event\_id & 1.60\\
+attendance & 1.39\\
+\rowcolor{gray!6}  avgnoisedb & 1.37\\
+game\_date & 1.15\\
 \addlinespace
-\rowcolor{gray!6}  minutes\_remaining & 1.11\\
+\rowcolor{gray!6}  minutes\_remaining & 1.09\\
 shot\_made\_flag & 1.06\\
 \rowcolor{gray!6}  arena\_temp & 1.02\\
 seconds\_remaining & 1.01\\
